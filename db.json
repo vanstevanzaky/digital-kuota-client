@@ -1,0 +1,142 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "customer@test.com",
+      "password": "password123",
+      "nama": "Stevan Zaky Setyanto",
+      "nomorHP": "081234567890",
+      "alamat": "Jl. Jendral Basuki Rahmat\n",
+      "saldo": 230000
+    },
+    {
+      "id": "2",
+      "email": "jane@test.com",
+      "password": "password123",
+      "nama": "Jane Smith",
+      "nomorHP": "081298765432",
+      "alamat": "Jl. Sudirman No. 123, Bandung",
+      "saldo": 750000
+    }
+  ],
+  "paketData": [
+    {
+      "id": "1",
+      "namaPaket": "Paket Harian 1GB",
+      "kuota": "1GB",
+      "masa_aktif": "1 Hari",
+      "harga": 5000,
+      "deskripsi": "Cocok untuk browsing dan chatting ringan sehari-hari",
+      "kategori": "harian"
+    },
+    {
+      "id": "2",
+      "namaPaket": "Paket Mingguan 5GB",
+      "kuota": "5GB",
+      "masa_aktif": "7 Hari",
+      "harga": 25000,
+      "deskripsi": "Ideal untuk streaming musik dan video kualitas SD",
+      "kategori": "mingguan"
+    },
+    {
+      "id": "3",
+      "namaPaket": "Paket Bulanan 15GB",
+      "kuota": "15GB",
+      "masa_aktif": "30 Hari",
+      "harga": 60000,
+      "deskripsi": "Paket hemat untuk penggunaan internet reguler sebulan penuh",
+      "kategori": "bulanan"
+    },
+    {
+      "id": "4",
+      "namaPaket": "Paket Unlimited Harian",
+      "kuota": "Unlimited",
+      "masa_aktif": "1 Hari",
+      "harga": 15000,
+      "deskripsi": "Bebas internetan seharian tanpa khawatir kuota habis",
+      "kategori": "unlimited"
+    },
+    {
+      "id": "5",
+      "namaPaket": "Paket Bulanan 30GB",
+      "kuota": "30GB",
+      "masa_aktif": "30 Hari",
+      "harga": 100000,
+      "deskripsi": "Untuk heavy user yang sering streaming HD dan download",
+      "kategori": "bulanan"
+    },
+    {
+      "id": "6",
+      "namaPaket": "Paket Gaming 10GB",
+      "kuota": "10GB",
+      "masa_aktif": "14 Hari",
+      "harga": 50000,
+      "deskripsi": "Koneksi stabil dengan ping rendah, khusus untuk gaming online",
+      "kategori": "gaming"
+    },
+    {
+      "id": "7",
+      "namaPaket": "Paket Streaming 20GB",
+      "kuota": "20GB",
+      "masa_aktif": "30 Hari",
+      "harga": 80000,
+      "deskripsi": "Optimized untuk streaming Netflix, YouTube, dan platform video lainnya",
+      "kategori": "streaming"
+    },
+    {
+      "id": "8",
+      "namaPaket": "Paket Weekend 3GB",
+      "kuota": "3GB",
+      "masa_aktif": "3 Hari",
+      "harga": 12000,
+      "deskripsi": "Paket spesial weekend untuk liburan singkat",
+      "kategori": "harian"
+    }
+  ],
+  "transaksi": [
+    {
+      "id": "1",
+      "userId": "1",
+      "paketId": "3",
+      "namaPaket": "Paket Bulanan 15GB",
+      "kuota": "15GB",
+      "harga": 60000,
+      "tanggal": "2025-10-15T10:30:00.000Z",
+      "status": "success",
+      "nomorHP": "081234567890"
+    },
+    {
+      "id": "47d0",
+      "userId": "1",
+      "paketId": "5",
+      "namaPaket": "Paket Bulanan 30GB",
+      "kuota": "30GB",
+      "harga": 100000,
+      "tanggal": "2025-10-19T04:50:02.484Z",
+      "status": "success",
+      "nomorHP": "081234567890"
+    },
+    {
+      "id": "f1c5",
+      "userId": "1",
+      "paketId": "5",
+      "namaPaket": "Paket Bulanan 30GB",
+      "kuota": "30GB",
+      "harga": 100000,
+      "tanggal": "2025-10-19T06:16:57.013Z",
+      "status": "success",
+      "nomorHP": "081234567890"
+    },
+    {
+      "id": "a337",
+      "userId": "1",
+      "paketId": "1",
+      "namaPaket": "Paket Harian 1GB",
+      "kuota": "1GB",
+      "harga": 5000,
+      "tanggal": "2025-10-19T13:25:49.580Z",
+      "status": "success",
+      "nomorHP": "081234567890"
+    }
+  ]
+}
