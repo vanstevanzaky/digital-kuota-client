@@ -44,7 +44,6 @@ const LoginPage = ({ setCurrentUser }) => {
                 });
             }
         } catch (error) {
-            console.error('Login error:', error);
             setLoading(false);
             setModalConfig({
                 open: true,
@@ -170,7 +169,24 @@ const LoginPage = ({ setCurrentUser }) => {
                                 💡 <strong>Tip:</strong> Gunakan paket data sesuai kebutuhan Anda. Hemat lebih banyak dengan paket bulanan!
                             </Text>
                         </div>
-                    </div>
+                    {/* Success/Error Modal */}
+                    {modalConfig.type === 'success' ? (
+                        <SuccessModal
+                            open={modalConfig.open}
+                            title={modalConfig.title}
+                            content={modalConfig.content}
+                            onOk={handleModalClose}
+                            onCancel={handleModalClose}
+                        />
+                    ) : (
+                        <ErrorModal
+                            open={modalConfig.open}
+                            title={modalConfig.title}
+                            content={modalConfig.content}
+                            onOk={handleModalClose}
+                            onCancel={handleModalClose}
+                        />
+                    )}                    </div>
 
                     {/* Right Side - Login Form */}
                     <Card

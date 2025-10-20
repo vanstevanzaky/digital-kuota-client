@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, Typography, Input, Tag, Spin, message, Modal, Button, App as AntdApp } from 'antd';
 import {
   SearchOutlined,
@@ -19,6 +20,7 @@ import './../styles/TransaksiPage.css';
 const { Title, Text } = Typography;
 
 const TransaksiPage = ({ currentUser, setCurrentUser }) => {
+  const navigate = useNavigate();
   const { modal } = AntdApp.useApp();
   const [loading, setLoading] = useState(true);
   const [paketList, setPaketList] = useState([]);
@@ -217,6 +219,9 @@ const TransaksiPage = ({ currentUser, setCurrentUser }) => {
         okText: 'Kembali ke Dashboard',
         okButtonProps: {
           style: { background: '#52c41a', borderColor: '#52c41a' }
+        },
+        onOk: () => {
+          navigate('/customer');
         }
       });
 

@@ -1,0 +1,512 @@
+/* Main Container */
+.transaksi-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 2vh 2vw;
+  padding-bottom: 4vh;
+}
+
+/* Page Header */
+.transaksi-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2.5vh 2vw;
+  border-radius: 16px;
+  margin-bottom: 2vh;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.25);
+  color: white;
+}
+
+.transaksi-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5vh;
+}
+
+.transaksi-header-title {
+  color: white !important;
+  margin: 0 !important;
+  font-size: clamp(20px, 1.75vw, 28px);
+  font-weight: 700;
+}
+
+.transaksi-header-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(12px, 0.875vw, 14px);
+  margin-top: 0.5vh;
+}
+
+.saldo-info {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  padding: 1vh 1.5vw;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  text-align: center;
+  min-width: 200px;
+}
+
+.saldo-label {
+  display: block;
+  font-size: clamp(10px, 0.75vw, 12px);
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.5vh;
+}
+
+.saldo-value {
+  display: block;
+  font-size: clamp(18px, 1.5vw, 24px);
+  font-weight: 700;
+  color: white;
+}
+
+/* Filter Section */
+.filter-section {
+  background: white;
+  padding: 1.5vh 2vw;
+  border-radius: 16px;
+  margin-bottom: 2vh;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5vh;
+  margin-bottom: 1.5vh;
+}
+
+.filter-title {
+  margin: 0 !important;
+  font-size: clamp(14px, 1vw, 16px);
+  font-weight: 700;
+  color: #262626;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 350px;
+  height: 2.5vh;
+  min-height: 40px;
+  border-radius: 10px;
+  font-size: clamp(12px, 0.875vw, 14px);
+}
+
+.kategori-filters {
+  display: flex;
+  gap: 0.75vw;
+  flex-wrap: wrap;
+}
+
+.kategori-tag {
+  padding: 0.75vh 1.5vw;
+  border-radius: 20px;
+  font-size: clamp(11px, 0.8125vw, 13px);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.kategori-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.kategori-tag.active {
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+}
+
+/* Stats Bar */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1vw;
+  margin-bottom: 2vh;
+}
+
+.stat-card-transaksi {
+  background: white;
+  padding: 1.5vh 1.5vw;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+  transition: all 0.3s ease;
+}
+
+.stat-card-transaksi:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.stat-icon-wrapper {
+  width: 3vw;
+  height: 3vw;
+  min-width: 45px;
+  min-height: 45px;
+  max-width: 50px;
+  max-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: clamp(18px, 1.5vw, 24px);
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-card-label {
+  display: block;
+  font-size: clamp(10px, 0.75vw, 12px);
+  color: #8c8c8c;
+  margin-bottom: 0.25vh;
+}
+
+.stat-card-value {
+  display: block;
+  font-size: clamp(14px, 1vw, 16px);
+  font-weight: 700;
+  color: #262626;
+}
+
+/* Paket Grid */
+.paket-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2vh;
+  margin-bottom: 2vh;
+}
+
+.paket-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.paket-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(102, 126, 234, 0.25);
+  border-color: #667eea;
+}
+
+.paket-card-header {
+  padding: 1.5vh 1.5vw;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-bottom: 2px solid #667eea;
+}
+
+.paket-kategori {
+  display: inline-block;
+  padding: 0.5vh 1vw;
+  border-radius: 20px;
+  font-size: clamp(9px, 0.6875vw, 11px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75vh;
+}
+
+.paket-name {
+  margin: 0 !important;
+  font-size: clamp(15px, 1.125vw, 18px);
+  font-weight: 700;
+  color: #262626;
+}
+
+.paket-card-body {
+  padding: 1.5vh 1.5vw;
+}
+
+.paket-info-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75vw;
+  margin-bottom: 1vh;
+}
+
+.paket-info-icon {
+  width: 2vw;
+  height: 2vw;
+  min-width: 32px;
+  min-height: 32px;
+  max-width: 36px;
+  max-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+  border-radius: 8px;
+  font-size: clamp(14px, 1vw, 16px);
+  color: #667eea;
+}
+
+.paket-info-text {
+  font-size: clamp(12px, 0.875vw, 14px);
+  font-weight: 600;
+  color: #262626;
+}
+
+.paket-deskripsi {
+  font-size: clamp(11px, 0.8125vw, 13px);
+  color: #8c8c8c;
+  line-height: 1.5;
+  margin: 1vh 0 1.5vh;
+  min-height: 40px;
+}
+
+.paket-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.5vh;
+  border-top: 1px solid #f0f0f0;
+}
+
+.paket-price-section {
+  flex: 1;
+}
+
+.paket-price-label {
+  display: block;
+  font-size: clamp(10px, 0.75vw, 12px);
+  color: #8c8c8c;
+  margin-bottom: 0.25vh;
+}
+
+.paket-price {
+  display: block;
+  font-size: clamp(16px, 1.25vw, 20px);
+  font-weight: 700;
+  color: #667eea;
+}
+
+.btn-beli {
+  height: 2.5vh;
+  min-height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  font-size: clamp(12px, 0.875vw, 14px);
+  font-weight: 700;
+  padding: 0 1.5vw;
+  transition: all 0.3s ease;
+}
+
+.btn-beli:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Empty State */
+.empty-state-transaksi {
+  text-align: center;
+  padding: 6vh 2vw;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.empty-icon-transaksi {
+  font-size: clamp(50px, 4vw, 64px);
+  color: #d9d9d9;
+  margin-bottom: 2vh;
+}
+
+.empty-title-transaksi {
+  font-size: clamp(16px, 1.25vw, 20px);
+  font-weight: 700;
+  color: #595959;
+  margin-bottom: 1vh;
+}
+
+.empty-desc-transaksi {
+  font-size: clamp(12px, 0.875vw, 14px);
+  color: #8c8c8c;
+}
+
+/* Loading State */
+.loading-container-transaksi {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+
+/* Modal Konfirmasi */
+.modal-konfirmasi {
+  border-radius: 16px !important;
+}
+
+.modal-paket-info {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 1.5vh 1.5vw;
+  border-radius: 12px;
+  margin-bottom: 1.5vh;
+}
+
+.modal-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75vh;
+  padding-bottom: 0.75vh;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-info-row:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.modal-info-label {
+  font-size: clamp(11px, 0.8125vw, 13px);
+  color: #8c8c8c;
+}
+
+.modal-info-value {
+  font-size: clamp(12px, 0.875vw, 14px);
+  font-weight: 600;
+  color: #262626;
+}
+
+.modal-price-highlight {
+  color: #667eea !important;
+  font-size: clamp(16px, 1.25vw, 20px) !important;
+}
+
+.modal-warning {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+  padding: 1vh 1vw;
+  margin-top: 1.5vh;
+  display: flex;
+  align-items: center;
+  gap: 0.75vw;
+}
+
+.modal-warning-icon {
+  font-size: clamp(16px, 1.25vw, 20px);
+  color: #ffc107;
+}
+
+.modal-warning-text {
+  font-size: clamp(11px, 0.8125vw, 13px);
+  color: #856404;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+  .paket-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 968px) {
+  .transaksi-header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .saldo-info {
+    width: 100%;
+  }
+
+  .filter-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-input {
+    max-width: 100%;
+  }
+
+  .paket-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .transaksi-container {
+    padding: 1vh 3vw;
+  }
+
+  .transaksi-header {
+    padding: 2vh 3vw;
+  }
+
+  .filter-section {
+    padding: 1.5vh 3vw;
+  }
+
+  .kategori-filters {
+    justify-content: center;
+  }
+
+  .stats-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .paket-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .paket-card-footer {
+    flex-direction: column;
+    gap: 1vh;
+  }
+
+  .btn-beli {
+    width: 100%;
+  }
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.paket-card {
+  animation: slideIn 0.4s ease;
+}
+
+/* Scrollbar Styling */
+.transaksi-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.transaksi-container::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+.transaksi-container::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 10px;
+}
+
+.transaksi-container::-webkit-scrollbar-thumb:hover {
+  background: #bfbfbf;
+}

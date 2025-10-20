@@ -11,7 +11,9 @@ import {
   EditOutlined,
   SaveOutlined,
   CloseOutlined,
-  InboxOutlined
+  InboxOutlined,
+  CheckCircleOutlined,
+  CloseCircleOutlined
 } from '@ant-design/icons';
 import Navbar from '../components/Navbar';
 import { ConfirmModal } from '../components/modals';
