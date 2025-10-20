@@ -221,6 +221,25 @@
   border: 1px solid #d9d9d9;
 }
 
+/* Top Up Button Specific */
+.btn-topup {
+  flex: 1;
+  height: 2.5vh;
+  min-height: 38px;
+  border-radius: 10px;
+  font-size: clamp(12px, 0.875vw, 14px);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  border: none;
+}
+
+.btn-topup:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+}
+
 /* Transaction History Card */
 .history-card {
   border-radius: 16px;
@@ -754,11 +773,9 @@
     gap: 1vh;
   }
 
-  .btn-edit,
-  .btn-save,
-  .btn-cancel {
+  .btn-topup,
+  .btn-edit {
     width: 100%;
-    min-height: 38px;
   }
 
   .history-header {

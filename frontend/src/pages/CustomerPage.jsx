@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Card, Typography, Button, Avatar, Spin, message, Input, Form, App as AntdApp } from 'antd';
+import { Card, Typography, Button, Avatar, Spin, message, Input, Form, App as AntdApp, InputNumber, Modal } from 'antd';
 import {
   UserOutlined,
   PhoneOutlined,
@@ -13,11 +13,12 @@ import {
   CloseOutlined,
   InboxOutlined,
   CheckCircleOutlined,
-  CloseCircleOutlined
+  CloseCircleOutlined,
+  DollarOutlined  // ✨ NEW ICON
 } from '@ant-design/icons';
 import Navbar from '../components/Navbar';
 import { ConfirmModal } from '../components/modals';
-import { updateUser, getTransaksiByUser, deleteTransaksi } from '../services/api';
+import { updateUser, getTransaksiByUser, deleteTransaksi, updateSaldo } from '../services/api';
 import './../styles/CustomerPage.css';
 
 const { Title, Text } = Typography;
@@ -28,11 +29,13 @@ const CustomerPage = ({ currentUser, setCurrentUser }) => {
   const [editMode, setEditMode] = useState(false);
   const [transaksiList, setTransaksiList] = useState([]);
   const [form] = Form.useForm();
+  const [topUpForm] = Form.useForm();  // ✨ NEW FORM
   const [deleteModalConfig, setDeleteModalConfig] = useState({
     open: false,
     transaksi: null,
   });
-  // Result modal state removed; using AntD App context modals
+  const [topUpModalVisible, setTopUpModalVisible] = useState(false);  // ✨ NEW STATE
+  const [topUpLoading, setTopUpLoading] = useState(false);  // ✨ NEW STATE
 
   // Load data transaksi saat component mount
   useEffect(() => {
@@ -145,8 +148,6 @@ const CustomerPage = ({ currentUser, setCurrentUser }) => {
     setDeleteModalConfig({ open: false, transaksi: null });
   };
 
-  // No result modal close handler needed
-
   // Format tanggal
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -161,6 +162,81 @@ const CustomerPage = ({ currentUser, setCurrentUser }) => {
 
   // Hitung total pengeluaran
   const totalPengeluaran = transaksiList.reduce((sum, t) => sum + t.harga, 0);
+
+  // ✨ NEW: Handle Top Up
+  const handleTopUpClick = () => {
+    topUpForm.resetFields();
+    setTopUpModalVisible(true);
+  };
+
+  const handleTopUpSubmit = async (values) => {
+    try {
+      setTopUpLoading(true);
+      
+      // Update saldo
+      const newSaldo = currentUser.saldo + values.nominal;
+      const updatedUser = await updateSaldo(currentUser.id, newSaldo);
+      
+      // Update current user
+      setCurrentUser(updatedUser);
+      
+      // Close modal
+      setTopUpModalVisible(false);
+      setTopUpLoading(false);
+      
+      // Show success modal
+      modal.success({
+        title: 'Top Up Berhasil! 🎉',
+        content: (
+          <div>
+            <p style={{ marginBottom: 16 }}>
+              <strong>Saldo Anda telah berhasil ditambahkan!</strong>
+            </p>
+            <div style={{ background: '#f6ffed', padding: 12, borderRadius: 8, border: '1px solid #b7eb8f' }}>
+              <div style={{ marginBottom: 8 }}>
+                <Text type="secondary">Nominal Top Up:</Text>{' '}
+                <Text strong style={{ color: '#52c41a' }}>
+                  Rp {values.nominal.toLocaleString('id-ID')}
+                </Text>
+              </div>
+              <div style={{ marginBottom: 8 }}>
+                <Text type="secondary">Saldo Sebelumnya:</Text>{' '}
+                <Text strong>Rp {currentUser.saldo.toLocaleString('id-ID')}</Text>
+              </div>
+              <div>
+                <Text type="secondary">Saldo Saat Ini:</Text>{' '}
+                <Text strong style={{ color: '#52c41a', fontSize: 16 }}>
+                  Rp {newSaldo.toLocaleString('id-ID')}
+                </Text>
+              </div>
+            </div>
+            <p style={{ marginTop: 16, marginBottom: 0 }}>
+              Saldo siap digunakan untuk pembelian paket data! 💳
+            </p>
+          </div>
+        ),
+        okText: 'OK, Mengerti',
+        centered: true,
+        icon: <CheckCircleOutlined style={{ fontSize: 64, color: '#52c41a' }} />,
+      });
+    } catch (error) {
+      console.error('Top up error:', error);
+      setTopUpLoading(false);
+      
+      modal.error({
+        title: 'Top Up Gagal! ❌',
+        content: 'Terjadi kesalahan saat melakukan top up. Silakan coba lagi.',
+        okText: 'OK, Mengerti',
+        centered: true,
+        icon: <CloseCircleOutlined style={{ fontSize: 64, color: '#ff4d4f' }} />,
+      });
+    }
+  };
+
+  const handleTopUpCancel = () => {
+    setTopUpModalVisible(false);
+    topUpForm.resetFields();
+  };
 
   return (
     <>
@@ -324,17 +400,32 @@ const CustomerPage = ({ currentUser, setCurrentUser }) => {
 
             {/* Profile Actions */}
             <div className="profile-actions">
-              {!editMode && (
-                <Button
-                  type="primary"
-                  icon={<EditOutlined />}
-                  onClick={handleEditClick}
-                  className="btn-edit"
-                  block
-                >
-                  Edit Profil
-                </Button>
-              )}
+              {!editMode ? (
+                <>
+                  <Button
+                    type="primary"
+                    icon={<EditOutlined />}
+                    onClick={handleEditClick}
+                    className="btn-edit"
+                    style={{ flex: 1 }}
+                  >
+                    Edit Profil
+                  </Button>
+                  <Button
+                    type="primary"
+                    icon={<DollarOutlined />}
+                    onClick={handleTopUpClick}
+                    className="btn-topup"
+                    style={{ 
+                      flex: 1,
+                      background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                      borderColor: 'transparent'
+                    }}
+                  >
+                    Top Up
+                  </Button>
+                </>
+              ) : null}
             </div>
           </Card>
 
@@ -413,6 +504,134 @@ const CustomerPage = ({ currentUser, setCurrentUser }) => {
           </Card>
         </div>
       </div>
+
+      {/* ✨ NEW: Top Up Modal */}
+      <Modal
+        title={
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <DollarOutlined style={{ color: '#10B981', fontSize: 20 }} />
+            <span>Top Up Saldo</span>
+          </div>
+        }
+        open={topUpModalVisible}
+        onCancel={handleTopUpCancel}
+        footer={null}
+        centered
+        width={450}
+      >
+        <Form
+          form={topUpForm}
+          onFinish={handleTopUpSubmit}
+          layout="vertical"
+          style={{ marginTop: 16 }}
+        >
+          {/* Current Balance Info */}
+          <div style={{ 
+            background: 'linear-gradient(135deg, #f6ffed 0%, #d9f7be 100%)',
+            padding: 16,
+            borderRadius: 12,
+            marginBottom: 20,
+            border: '2px solid #b7eb8f'
+          }}>
+            <Text type="secondary" style={{ display: 'block', marginBottom: 4 }}>
+              Saldo Saat Ini:
+            </Text>
+            <Text strong style={{ fontSize: 24, color: '#10B981' }}>
+              Rp {currentUser?.saldo?.toLocaleString('id-ID') || 0}
+            </Text>
+          </div>
+
+          {/* Nominal Input */}
+          <Form.Item
+            name="nominal"
+            label={<span style={{ fontWeight: 600 }}>Nominal Top Up</span>}
+            rules={[
+              { required: true, message: 'Nominal wajib diisi!' },
+              { 
+                type: 'number', 
+                min: 10000, 
+                message: 'Minimal top up Rp 10.000!' 
+              },
+              { 
+                type: 'number', 
+                max: 10000000, 
+                message: 'Maksimal top up Rp 10.000.000!' 
+              }
+            ]}
+          >
+            <InputNumber
+              style={{ width: '100%', height: 50 }}
+              formatter={value => `Rp ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+              parser={value => value.replace(/Rp\s?|(\.*)/g, '')}
+              placeholder="Masukkan nominal (min. Rp 10.000)"
+              prefix={<WalletOutlined style={{ color: '#10B981' }} />}
+            />
+          </Form.Item>
+
+          {/* Quick Amount Buttons */}
+          <div style={{ marginBottom: 20 }}>
+            <Text type="secondary" style={{ display: 'block', marginBottom: 8, fontSize: 12 }}>
+              Pilih Nominal Cepat:
+            </Text>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              {[50000, 100000, 200000, 500000, 1000000].map((amount) => (
+                <Button
+                  key={amount}
+                  size="small"
+                  onClick={() => topUpForm.setFieldsValue({ nominal: amount })}
+                  style={{ 
+                    borderRadius: 20,
+                    borderColor: '#10B981',
+                    color: '#10B981'
+                  }}
+                >
+                  {amount >= 1000000 ? `${amount / 1000000}jt` : `${amount / 1000}k`}
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          {/* Info Box */}
+          <div style={{ 
+            background: '#e6f7ff',
+            padding: 12,
+            borderRadius: 8,
+            marginBottom: 20,
+            border: '1px solid #91d5ff'
+          }}>
+            <Text style={{ fontSize: 12, color: '#0958d9' }}>
+              💡 <strong>Info:</strong> Top up minimal Rp 10.000 dan maksimal Rp 10.000.000 per transaksi.
+            </Text>
+          </div>
+
+          {/* Submit Button */}
+          <Form.Item style={{ marginBottom: 0 }}>
+            <div style={{ display: 'flex', gap: 12 }}>
+              <Button
+                onClick={handleTopUpCancel}
+                style={{ flex: 1, height: 44 }}
+              >
+                Batal
+              </Button>
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={topUpLoading}
+                style={{ 
+                  flex: 2,
+                  height: 44,
+                  background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                  borderColor: 'transparent',
+                  fontWeight: 600
+                }}
+                icon={<DollarOutlined />}
+              >
+                {topUpLoading ? 'Memproses...' : 'Top Up Sekarang'}
+              </Button>
+            </div>
+          </Form.Item>
+        </Form>
+      </Modal>
 
       {/* Delete Confirmation Modal */}
       <ConfirmModal

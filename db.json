@@ -7,7 +7,7 @@
       "nama": "Stevan Zaky Setyanto",
       "nomorHP": "081234567890",
       "alamat": "Jl. Jendral Basuki Rahmat No.91 \n\n",
-      "saldo": 999715999
+      "saldo": 100000
     },
     {
       "id": "2",
@@ -91,6 +91,24 @@
       "harga": 12000,
       "deskripsi": "Paket spesial weekend untuk liburan singkat",
       "kategori": "harian"
+    },
+    {
+      "id": "9",
+      "namaPaket": "Paket Super Hemat 2GB",
+      "kuota": "2GB",
+      "masa_aktif": "3 Hari",
+      "harga": 8000,
+      "deskripsi": "Paket hemat untuk kebutuhan internet ringan selama 3 hari",
+      "kategori": "harian"
+    },
+    {
+      "id": "10",
+      "namaPaket": "Paket Jumbo 50GB",
+      "kuota": "50GB",
+      "masa_aktif": "30 Hari",
+      "harga": 150000,
+      "deskripsi": "Paket jumbo untuk kebutuhan data sangat tinggi selama sebulan penuh",
+      "kategori": "bulanan"
     }
   ],
   "transaksi": [
@@ -168,6 +186,17 @@
       "kuota": "1GB",
       "harga": 5000,
       "tanggal": "2025-10-20T14:01:17.510Z",
+      "status": "success",
+      "nomorHP": "081234567890"
+    },
+    {
+      "id": "b5b4",
+      "userId": "1",
+      "paketId": "10",
+      "namaPaket": "Paket Jumbo 50GB",
+      "kuota": "50GB",
+      "harga": 150000,
+      "tanggal": "2025-10-20T15:08:57.245Z",
       "status": "success",
       "nomorHP": "081234567890"
     }
