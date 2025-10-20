@@ -8,7 +8,7 @@ Web aplikasi e-commerce modern untuk pembelian paket data internet dengan fokus 
 
 **Development Period:**
 - **Start Date:** 18 Oktober 2025, 14.00 WIB
-- **End Date:** 19 Oktober 2025, 21.32 WIB
+- **End Date:** 20 Oktober 2025, 22.00 WIB
 - **Total Duration:** 2 hari / 14 jam
 - **Developer:** Stevan Zaky S.
 
