@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Form, Input, Button, Card, Typography, message, Space, Divider } from 'antd';
+import { Form, Input, Button, Card, Typography, Space, Divider } from 'antd';
 import { UserOutlined, LockOutlined, ShoppingOutlined, ThunderboltOutlined, SafetyOutlined, RocketOutlined, CheckCircleFilled } from '@ant-design/icons';
 import { loginUser } from '../services/api';
 import { SuccessModal, ErrorModal } from '../components/modals';
@@ -13,7 +13,7 @@ const LoginPage = ({ setCurrentUser }) => {
     const [hoveredFeature, setHoveredFeature] = useState(null);
     const [modalConfig, setModalConfig] = useState({
         open: false,
-        type: '', // 'success' or 'error'
+        type: '',
         title: '',
         content: '',
     });
@@ -24,15 +24,13 @@ const LoginPage = ({ setCurrentUser }) => {
         try {
             const user = await loginUser(values.email, values.password);
             if (user) {
-                // Set loading to false first
                 setLoading(false);
-                // Show modal immediately with user data stored
                 setModalConfig({
                     open: true,
                     type: 'success',
                     title: 'Login Berhasil! 🎉',
                     content: `Selamat datang kembali, ${user.nama}! Anda akan diarahkan ke halaman customer.`,
-                    userData: user, // Store user data in modal config
+                    userData: user,
                 });
             } else {
                 setLoading(false);
@@ -58,7 +56,6 @@ const LoginPage = ({ setCurrentUser }) => {
         const isSuccess = modalConfig.type === 'success';
         setModalConfig({ ...modalConfig, open: false });
         
-        // If login was successful, set user and navigate
         if (isSuccess && modalConfig.userData) {
             setCurrentUser(modalConfig.userData);
             setTimeout(() => {
@@ -169,24 +166,7 @@ const LoginPage = ({ setCurrentUser }) => {
                                 💡 <strong>Tip:</strong> Gunakan paket data sesuai kebutuhan Anda. Hemat lebih banyak dengan paket bulanan!
                             </Text>
                         </div>
-                    {/* Success/Error Modal */}
-                    {modalConfig.type === 'success' ? (
-                        <SuccessModal
-                            open={modalConfig.open}
-                            title={modalConfig.title}
-                            content={modalConfig.content}
-                            onOk={handleModalClose}
-                            onCancel={handleModalClose}
-                        />
-                    ) : (
-                        <ErrorModal
-                            open={modalConfig.open}
-                            title={modalConfig.title}
-                            content={modalConfig.content}
-                            onOk={handleModalClose}
-                            onCancel={handleModalClose}
-                        />
-                    )}                    </div>
+                    </div>
 
                     {/* Right Side - Login Form */}
                     <Card
@@ -286,7 +266,7 @@ const LoginPage = ({ setCurrentUser }) => {
                 </div>
             </div>
 
-            {/* Success/Error Modal */}
+            {/* Success/Error Modal - ONLY ONE RENDER */}
             {modalConfig.type === 'success' ? (
                 <SuccessModal
                     open={modalConfig.open}
